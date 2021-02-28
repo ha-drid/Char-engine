@@ -1,7 +1,7 @@
 #include "Window.h"
 #include <stdexcept>
 #include <stb/stb_easy_font.h>
-#include "../GL/VAO.h"
+#include "../GL/Console.h"
 
 void print_string(float x, float y, char* text, float r, float g, float b)
 {
@@ -33,7 +33,7 @@ Window::Window(int width, int height, const std::string& name)
 	{
 		throw std::runtime_error("GLew init error\n");
 	}
-	//glOrtho(0, 6, 8, 0, -1, 1);
+	
 }
 
 void Window::setContexCurrent()
@@ -43,26 +43,14 @@ void Window::setContexCurrent()
 
 void Window::loop()
 {
-	GL::VAO vao;
-
-	vao.addVertexBufferObject({
-		{ 0.0f, 0.0f, 0.0f },
-		{ 1.0f, 0.0f, 0.0f },
-		{ 0.0f, 1.0f, 0.0f }
-		});
-
-	vao.addIndices({
-		0, 1, 2
-	});
-
-	
+	GL::Console console(20, 20);
 	while (glfwWindowShouldClose(mWindow) == false)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(1, 0, 0, 1);
+		glClearColor(0, 0, 0, 1);
 		
 		//print_string(0, 0, (char*)"@", 1, 1, 1);
-		vao.draw();
+		console.print("Text");
 		glfwSwapBuffers(mWindow);
 
 		glfwPollEvents();

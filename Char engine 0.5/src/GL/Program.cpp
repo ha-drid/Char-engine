@@ -1,10 +1,10 @@
 #include "Program.h"
 
-GL::Program::Program(const std::string& name)
+GL::Program::Program(const std::string& vertex_shader, const std::string& fragment_shader)
 {
 	mProgram = glCreateProgram();
-	mVertexShader = loadShader("res\\glsl\\" + name + ".vert", GL_VERTEX_SHADER);
-	mFragmentShader = loadShader("res\\glsl\\" + name + ".frag", GL_FRAGMENT_SHADER);
+	mVertexShader = loadShader(vertex_shader, GL_VERTEX_SHADER);
+	mFragmentShader = loadShader(fragment_shader, GL_FRAGMENT_SHADER);
 }
 
 void GL::Program::link()

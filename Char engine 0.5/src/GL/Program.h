@@ -2,14 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../gl.h"
+#include <gl.h>
 
 namespace GL
 {
 	class Program
 	{
 	public:
-		Program(const std::string& name);
+		Program(const std::string& vertex_shader, const std::string& fragment_shader);
 		void link();
 		void bindAttribute(uint32_t index, const std::string& name);
 		void use();
