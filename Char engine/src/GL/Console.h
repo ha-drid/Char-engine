@@ -1,6 +1,7 @@
 #pragma once
 #include "VAO.h"
 #include "Program.h"
+#include "Texture.h"
 #include <string>
 
 namespace GL
@@ -12,9 +13,10 @@ namespace GL
 		void print(const std::string& text);
 		~Console();
 	private:
-		void drawChar(const char16_t symbol);
+		void drawChar(const unsigned char symbol);
 		GL::VAO vao;
-		GL::Program shader{"res\\glsl\\main.vert", "res\\glsl\\main.frag" };
+		GL::Program shader{ "res\\glsl\\main.vert", "res\\glsl\\main.frag" };
+		GL::Texture mLuicidaConsoleFont{ "res\\img\\Luicida Console.bmp" };
 	};
 };
 

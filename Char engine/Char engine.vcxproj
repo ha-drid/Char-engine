@@ -118,6 +118,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>F:\libs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,6 +146,7 @@
     <ClCompile Include="src\GL\Console.cpp" />
     <ClCompile Include="src\GLFW\GLFW.cpp" />
     <ClCompile Include="src\GL\Program.cpp" />
+    <ClCompile Include="src\GL\Texture.cpp" />
     <ClCompile Include="src\GL\VAO.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\GLFW\Window.cpp" />
@@ -153,8 +155,12 @@
     <ClInclude Include="src\GL\Console.h" />
     <ClInclude Include="src\GLFW\GLFW.h" />
     <ClInclude Include="src\GLFW\Window.h" />
+    <ClInclude Include="src\GL\Texture.h" />
     <ClInclude Include="src\GL\Program.h" />
     <ClInclude Include="src\GL\VAO.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\img\Luicida Console.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

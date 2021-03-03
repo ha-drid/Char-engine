@@ -47,9 +47,8 @@ void Window::loop()
 	while (glfwWindowShouldClose(mWindow) == false)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(0, 0, 0, 1);
+		glClearColor(1, 0, 0, 1);
 		
-		//print_string(0, 0, (char*)"@", 1, 1, 1);
 		console.print("Text");
 		glfwSwapBuffers(mWindow);
 

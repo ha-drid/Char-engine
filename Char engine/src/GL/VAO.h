@@ -16,6 +16,9 @@ namespace GL
 		void addVertexBufferObject(const std::vector<glm::vec2> data);
 		void addVertexBufferObject(const std::vector<glm::vec3> data);
 		void addVertexBufferObject(const std::vector<glm::vec4> data);
+
+		void remixVertexBufferObject2(const std::vector<float> data);
+
 		void addIndices(const std::vector<unsigned> data);
 		~VAO();
 	private:

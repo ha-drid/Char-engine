@@ -25,10 +25,17 @@ void GL::Program::use()
 	glUseProgram(mProgram);
 }
 
-void GL::Program::setFloat(const std::string& name, float animation)
+void GL::Program::setFloat(const std::string& name, float cnt)
 {
-	glUniform1f(getLocation(name), animation);
+	glUniform1f(getLocation(name), cnt);
 }
+
+void GL::Program::setInt(const std::string& name, int cnt)
+{
+	glUniform1i(getLocation(name), cnt);
+}
+
+
 
 GL::Program::~Program()
 {
