@@ -13,13 +13,19 @@ namespace GL
 		void link();
 		void bindAttribute(uint32_t index, const std::string& name);
 		void use();
-		void setFloat(const std::string& name, float cnt);
-		void setInt(const std::string& name, int cnt);
+
+		void setUniformFloat1(const std::string& name, float cnt);
+		void setUniformFLoat3(const std::string& name, float v0, float v1, float v2);
+
+		void setUniformInt(const std::string& name, int cnt);
+		void setUniformVec3(const std::string& name, size_t size, const float* array);
 		
+
 		~Program();
 	private:
 		uint32_t loadShader(const std::string& name, uint32_t ShaderType);
-		int getLocation(const std::string& name);
+		int getUniformLocation(const std::string& name);
+		int getAttributLocation(const std::string& name);
 		uint32_t mProgram;
 		uint32_t mVertexShader;
 		uint32_t mFragmentShader;

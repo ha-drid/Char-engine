@@ -2,13 +2,12 @@
 
 GL::VAO::VAO()
 {
-	glGenVertexArrays(0, &mVao);
+	glGenVertexArrays(1, &mVao);
 	bind();
 }
 
 void GL::VAO::bind()
 {
-	glBindVertexArray(0);
 	glBindVertexArray(mVao);
 }
 
@@ -36,8 +35,6 @@ void GL::VAO::addVertexBufferObject(const std::vector<float> data)
 	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(mBuffers.size(), 1, GL_FLOAT, GL_FALSE, 0, nullptr);
 	mBuffers.push_back(VBO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
@@ -49,8 +46,6 @@ void GL::VAO::addVertexBufferObject(const std::vector<glm::vec2> data)
 	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(glm::vec2), data.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(mBuffers.size(), 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 	mBuffers.push_back(VBO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void GL::VAO::addVertexBufferObject(const std::vector<glm::vec3> data)
@@ -61,8 +56,6 @@ void GL::VAO::addVertexBufferObject(const std::vector<glm::vec3> data)
 	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(glm::vec3), data.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(mBuffers.size(), 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	mBuffers.push_back(VBO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
@@ -74,15 +67,6 @@ void GL::VAO::addVertexBufferObject(const std::vector<glm::vec4> data)
 	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(glm::vec4), data.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(mBuffers.size(), 4, GL_FLOAT, GL_FALSE, 0, nullptr);
 	mBuffers.push_back(VBO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-void GL::VAO::remixVertexBufferObject2(const std::vector<float> data)
-{
-	glBindBuffer(GL_ARRAY_BUFFER, mBuffers[1]);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, data.size() * sizeof(float), data.data());
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void GL::VAO::addIndices(const std::vector<unsigned> data)
@@ -98,5 +82,5 @@ GL::VAO::~VAO()
 {
 	glDeleteBuffers(mBuffers.size(), mBuffers.data());
 	glDeleteBuffers(1, &mIndicesBuffer);
-	glDeleteVertexArrays(0, &mVao);
+	glDeleteVertexArrays(1, &mVao);
 }

@@ -1,19 +1,15 @@
-#version 330
+#version 110 core
 
 in vec3 position;
 in vec2 uv;
 
-out vec2 pass_uv;
 
-uniform float width;
-uniform float height;
+
+out vec2 pass_uv;
 
 void main()
 {
-	vec4 pos = (vec4(position, 1) * vec4(2.0 / width, 2.0 / height, 1, 1));
-	//pos.x += 10;
-	
-	gl_Position = pos;
+	gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1);
 	
 	pass_uv = uv;
 }

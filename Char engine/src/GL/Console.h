@@ -3,6 +3,7 @@
 #include "Program.h"
 #include "Texture.h"
 #include <string>
+#include <map>
 
 namespace GL
 {
@@ -10,13 +11,14 @@ namespace GL
 	{
 	public:
 		Console(int width, int height);
-		void print(const std::string& text);
+		void swap();
 		~Console();
 	private:
-		void drawChar(const unsigned char symbol);
-		GL::VAO vao;
+		GL::VAO symbolVAO;
+		GL::VAO symbolVAO1;
 		GL::Program shader{ "res\\glsl\\main.vert", "res\\glsl\\main.frag" };
 		GL::Texture mLuicidaConsoleFont{ "res\\img\\Luicida Console.bmp" };
+		int mWidth, mHeight;
 	};
 };
 

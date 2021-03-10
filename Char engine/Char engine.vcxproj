@@ -143,8 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\GL\Console.cpp" />
     <ClCompile Include="src\GLFW\GLFW.cpp" />
+    <ClCompile Include="src\GL\Console.cpp" />
+    <ClCompile Include="src\GL\Figure.cpp" />
     <ClCompile Include="src\GL\Program.cpp" />
     <ClCompile Include="src\GL\Texture.cpp" />
     <ClCompile Include="src\GL\VAO.cpp" />
@@ -152,9 +153,10 @@
     <ClCompile Include="src\GLFW\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GL\Console.h" />
     <ClInclude Include="src\GLFW\GLFW.h" />
     <ClInclude Include="src\GLFW\Window.h" />
+    <ClInclude Include="src\GL\Console.h" />
+    <ClInclude Include="src\GL\Figure.h" />
     <ClInclude Include="src\GL\Texture.h" />
     <ClInclude Include="src\GL\Program.h" />
     <ClInclude Include="src\GL\VAO.h" />

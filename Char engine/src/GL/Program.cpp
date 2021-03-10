@@ -25,16 +25,6 @@ void GL::Program::use()
 	glUseProgram(mProgram);
 }
 
-void GL::Program::setFloat(const std::string& name, float cnt)
-{
-	glUniform1f(getLocation(name), cnt);
-}
-
-void GL::Program::setInt(const std::string& name, int cnt)
-{
-	glUniform1i(getLocation(name), cnt);
-}
-
 
 
 GL::Program::~Program()
@@ -85,8 +75,32 @@ uint32_t GL::Program::loadShader(const std::string& path, uint32_t shaderType)
 	return shader;
 }
 
-int GL::Program::getLocation(const std::string& name)
+int GL::Program::getUniformLocation(const std::string& name)
 {
-	
 	return glGetUniformLocation(mProgram, name.c_str());
+}
+
+int GL::Program::getAttributLocation(const std::string& name)
+{
+	return glGetAttribLocation(mProgram, name.c_str());
+}
+
+void GL::Program::setUniformFloat1(const std::string& name, float cnt)
+{
+	glUniform1f(getUniformLocation(name), cnt);
+}
+
+void GL::Program::setUniformFLoat3(const std::string& name, float v0, float v1, float v2)
+{
+	glUniform3f(getUniformLocation(name), v0, v1, v2);
+}
+
+void GL::Program::setUniformInt(const std::string& name, int cnt)
+{
+	glUniform1i(getUniformLocation(name), cnt);
+}
+
+void GL::Program::setUniformVec3(const std::string& name, size_t size, const float* array)
+{
+	glUniform3fv(getUniformLocation(name), size, array);
 }

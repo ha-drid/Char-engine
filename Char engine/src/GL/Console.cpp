@@ -1,76 +1,70 @@
 #include "Console.h"
+#include "Figure.h"
 
 GL::Console::Console(int width, int height)
 {
-	vao.addVertexBufferObject({
-		{  0.0f, -1.0f,  0.0f  },
-		{  1.0f, -1.0f,  0.0f  },
-		{  1.0f,  0.0f,  0.0f  },
-		{  0.0f,  0.0f,  0.0f  }
-		});
+    mWidth = width;
+    mHeight = height;
+    /*
+    vao.addVertexBufferObject({
+        {  0.0f, -1.0f,  0.0f },
+        {  0.0f,  0.0f,  0.0f },
+        {  1.0f,  0.0f,  0.0f },
+        {  1.0f, -1.0f,  0.0f }
+        });
 
-	vao.addVertexBufferObject({
-		{ 0.0f, 1.0f },
-		{ 1.0f, 1.0f },
-		{ 1.0f, 0.0f },
-		{ 0.0f, 0.0f },
-		});
+    float width_sym = 1.0f / 16.0f;
+    char c = '@';
+    uint32_t y = c >> 4;
+    uint32_t x = c & 0b1111;
 
-	vao.addIndices({
-		0,1,2,
-		0,2,3
-		});
+    struct { float top, left, right, bottom; } rct;
+    rct.top = (float)y * width_sym;
+    rct.bottom = rct.top + width_sym;
+    rct.left = (float)x * width_sym;
+    rct.right = rct.left + width_sym;
 
-	shader.bindAttribute(0, "position");
-	shader.bindAttribute(1, "uv");
+    vao.addVertexBufferObject({
+        { rct.left, rct.bottom },
+        { rct.left, rct.top    },
+        { rct.right, rct.top   },
+        { rct.right, rct.bottom},
+        });
 
-	shader.link();
+    vao.addIndices({
+        0, 1, 2,
+        0, 2, 3
+        });
+    */
 
-	shader.use();
+    GL::CharacterSymbol('A', symbolVAO);
+    GL::CharacterSymbol('B', symbolVAO1);
 
-	shader.setFloat("width", width);
-	shader.setFloat("height", height);
+    shader.bindAttribute(0, "position");
+    shader.bindAttribute(1, "uv");
+
+    shader.link();
+
+    shader.use();
 }
 
-void GL::Console::print(const std::string& text)
+void GL::Console::swap()
 {
-	//for (int i = 0; i < text.length(); ++i)
-	shader.use();
+    glLoadIdentity();
+    glScalef(2.0f / mWidth, 2.0f / mHeight, 1.0f);
+    glTranslatef(-mWidth * 0.5f, mHeight * 0.5f, 0.0f);
 
-	glActiveTexture(GL_TEXTURE0);
+    shader.setUniformInt("mTexture", 0);
+    glActiveTexture(GL_TEXTURE0);
+    mLuicidaConsoleFont.bind();
 
-	mLuicidaConsoleFont.bind();
-
-	shader.setInt("mTexture", 0);
-
-	drawChar('Q');
+    shader.use();
+    symbolVAO.draw(GL_TRIANGLES);
+    glTranslatef(1.0f, 0.0f, 0.0f);
+    symbolVAO1.draw();
 }
 
 GL::Console::~Console()
 {
-}
 
-const float SYMBOL_WIDTH = 1.0f / 16.0f;
-void GL::Console::drawChar(const unsigned char symbol)
-{
-	shader.setInt("mTexture", 0);
-
-	uint32_t y = symbol >> 4;
-	uint32_t x = symbol & 0b1111;
-
-	struct { float top, left, right, bottom; } rct;
-
-	rct.top = (float)y * SYMBOL_WIDTH;
-	rct.bottom = rct.top + SYMBOL_WIDTH;
-	rct.left = (float)x * SYMBOL_WIDTH;
-	rct.right = rct.left + SYMBOL_WIDTH;
-	
-	vao.remixVertexBufferObject2({
-		rct.left,rct.bottom,
-		rct.right,rct.bottom,
-		rct.right,rct.top,
-		rct.left,rct.top,
-		});
-
-	vao.draw();
 }
